@@ -6,6 +6,19 @@ using UnityEngine;
 public class Bounce : MonoBehaviour
 {
     public float bounceForce = 10f;
+    private bool isBouncing = false;
+    public Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+
+        // 初始化为 Idle 状态
+        if (animator != null)
+        {
+            animator.SetBool("isIdle", true);
+        }
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -21,9 +34,29 @@ public class Bounce : MonoBehaviour
     
         if (rb)
         {
+
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             
             rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
         }
+
+        if (animator != null)
+        {
+            animator.SetBool("isIdle", false); // 进入 Press 状态
+            isBouncing = true;
+            StartCoroutine(ResetToIdle());
+        }
     }
+
+    private IEnumerator ResetToIdle()
+    {
+        yield return new WaitForSeconds(0.2f); // 动画持续时间
+        if (animator != null)
+        {
+            animator.SetBool("isIdle", true);
+        }
+
+        isBouncing = false;
+    }
+
 }
