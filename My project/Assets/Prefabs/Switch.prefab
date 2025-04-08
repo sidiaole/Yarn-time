@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 164249576, guid: 3c28a828a8535ba42980db3eaf474f90, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7f7fb1e530180ed4885e74ea91d640c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 3.4125, y: 2.8625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,8 +122,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.5}
-    newSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 3.36, y: 3.25}
+    newSize: {x: 3.4125, y: 2.8625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38047334db6bfc848b9aa1a6eca8d9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button_standard: {fileID: 164249576, guid: 3c28a828a8535ba42980db3eaf474f90, type: 3}
-  button_pressed: {fileID: -1186986995, guid: 3c28a828a8535ba42980db3eaf474f90, type: 3}
+  button_standard: {fileID: 21300000, guid: 7f7fb1e530180ed4885e74ea91d640c1, type: 3}
+  button_pressed: {fileID: 21300000, guid: 9fce6592a066be64d99cb0ef287ddb75, type: 3}
   trap: {fileID: 0}
   switchCounter: {fileID: 0}
