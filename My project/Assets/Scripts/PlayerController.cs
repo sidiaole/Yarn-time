@@ -122,9 +122,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
 
-        animator.SetFloat("yVelocity",rb.velocity.y);
+        animator.SetFloat("yVelocity",rb.linearVelocity.y);
 
         UpdateSound();
     }
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
         if (context.started && touchingDirections.IsGrounded)
         {
             animator.SetTrigger("jump");
-            rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
         }
     
     }
@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
         IsDead = true; // ��ǽ�ɫ������
         animator.Play("player_die"); // ֱ�Ӳ�����������
 
-        rb.velocity = Vector2.zero; // ����ֹͣ��ɫ�ƶ�
+        rb.linearVelocity = Vector2.zero; // ����ֹͣ��ɫ�ƶ�
         //rb.isKinematic = true; // �ý�ɫ������ʱ��������Ӱ��
         gameObject.GetComponent<PlayerInput>().enabled = false;
 
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
     private void UpdateSound()
     {
         //start footsteps event if the player has an x velocity and is on the ground
-        if (rb.velocity.x != 0 && touchingDirections.IsGrounded)
+        if (rb.linearVelocity.x != 0 && touchingDirections.IsGrounded)
         {
             //get the playback state
             PLAYBACK_STATE playbackState;

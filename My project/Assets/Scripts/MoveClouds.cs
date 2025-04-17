@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MoveClouds : MonoBehaviour
@@ -7,25 +8,33 @@ public class MoveClouds : MonoBehaviour
     // Start is called before the first frame update
 
     public float speed = 0.5f;
-    private float resetX;
+    public List<Transform> cloudParts; // 拖进去几张不同风格的云图（或同一张重复用）
+    private float partWidth;
 
     void Start()
     {
-        float camHeight = Camera.main.orthographicSize * 2f;
-        float camWidth = camHeight * Camera.main.aspect;
+        if (cloudParts.Count == 0) return;
 
-        resetX = Camera.main.transform.position.x + camWidth / 2f + 2f; // 右边多加一点边距
+        // 预设假定每张图宽度一样
+        SpriteRenderer sr = cloudParts[0].GetComponent<SpriteRenderer>();
+        partWidth = sr.bounds.size.x;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-
-        if (transform.position.x > resetX)
+        foreach (Transform cloud in cloudParts)
         {
-            // 例如从左边 -resetX 重来
-            transform.position = new Vector3(-resetX, transform.position.y, transform.position.z);
+            cloud.Translate(Vector2.right * speed * Time.deltaTime);
+
+            float camRight = Camera.main.transform.position.x + Camera.main.orthographicSize * Camera.main.aspect;
+            if (cloud.position.x - partWidth / 2f > camRight)
+            {
+                // 找到最左边的云图，接在它后面
+                Transform leftMost = cloudParts.OrderBy(c => c.position.x).First();
+                cloud.position = new Vector3(leftMost.position.x - partWidth, cloud.position.y, cloud.position.z);
+            }
         }
     }
 }

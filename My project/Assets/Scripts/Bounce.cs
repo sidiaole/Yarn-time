@@ -13,7 +13,7 @@ public class Bounce : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        // ³õÊ¼»¯Îª Idle ×´Ì¬
+        // ï¿½ï¿½Ê¼ï¿½ï¿½Îª Idle ×´Ì¬
         if (animator != null)
         {
             animator.SetBool("isIdle", true);
@@ -35,14 +35,14 @@ public class Bounce : MonoBehaviour
         if (rb)
         {
 
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             
             rb.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
         }
 
         if (animator != null)
         {
-            animator.SetBool("isIdle", false); // ½øÈë Press ×´Ì¬
+            animator.SetBool("isIdle", false); // ï¿½ï¿½ï¿½ï¿½ Press ×´Ì¬
             isBouncing = true;
             StartCoroutine(ResetToIdle());
         }
@@ -50,7 +50,7 @@ public class Bounce : MonoBehaviour
 
     private IEnumerator ResetToIdle()
     {
-        yield return new WaitForSeconds(0.2f); // ¶¯»­³ÖÐøÊ±¼ä
+        yield return new WaitForSeconds(0.2f); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
         if (animator != null)
         {
             animator.SetBool("isIdle", true);

@@ -128,9 +128,9 @@ public class PlayerController2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(moveInput.x * CurrentMoveSpeed, rb.linearVelocity.y);
 
-        animator.SetFloat("yVelocity", rb.velocity.y);
+        animator.SetFloat("yVelocity", rb.linearVelocity.y);
 
         UpdateSound();
     }
@@ -172,19 +172,19 @@ public class PlayerController2 : MonoBehaviour
         if (context.started && touchingDirections.IsGrounded)
         {
             animator.SetTrigger("jump");
-            rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
         }
 
     }
 
     public void Die()
     {
-        if (IsDead) return; // ±ÜÃâÖØ¸´ËÀÍö
-        IsDead = true; // ±ê¼Ç½ÇÉ«ÒÑËÀÍö
-        animator.Play("player2_die"); // Ö±½Ó²¥·ÅËÀÍö¶¯»­
+        if (IsDead) return; // ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
+        IsDead = true; // ï¿½ï¿½Ç½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        animator.Play("player2_die"); // Ö±ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        rb.velocity = Vector2.zero; // Á¢¼´Í£Ö¹½ÇÉ«ÒÆ¶¯
-        //rb.isKinematic = true; // ÈÃ½ÇÉ«ÔÚËÀÍöÊ±²»ÊÜÎïÀíÓ°Ïì
+        rb.linearVelocity = Vector2.zero; // ï¿½ï¿½ï¿½ï¿½Í£Ö¹ï¿½ï¿½É«ï¿½Æ¶ï¿½
+        //rb.isKinematic = true; // ï¿½Ã½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½
         gameObject.GetComponent<PlayerInput>().enabled = false;
 
         StartCoroutine(RespawnAfterDeath());
@@ -192,7 +192,7 @@ public class PlayerController2 : MonoBehaviour
 
     private IEnumerator RespawnAfterDeath()
     {
-        // µÈ´ýËÀÍö¶¯»­²¥·ÅÍê³É
+        // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(1f);
 
         Respawn();
@@ -209,7 +209,7 @@ public class PlayerController2 : MonoBehaviour
     private void UpdateSound()
     {
         //start footsteps event if the player has an x velocity and is on the ground
-        if (rb.velocity.x != 0 && touchingDirections.IsGrounded)
+        if (rb.linearVelocity.x != 0 && touchingDirections.IsGrounded)
         {
             //get the playback state
             PLAYBACK_STATE playbackState;
